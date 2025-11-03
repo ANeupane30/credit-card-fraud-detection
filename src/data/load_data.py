@@ -19,15 +19,21 @@ continuous_cols = [col for col in num_cols if df[col].nunique() > 20]
 discrete_cols = [col for col in num_cols if df[col].nunique() <= 20]
 
 
-# Outlier Detection using Isolation Forest
-iso_forest = IsolationForest(n_estimators=150, contamination='auto', random_state=42)
-outliers = iso_forest.fit_predict(df[continuous_cols])
-df['Outlier'] = outliers
-print("Number of outliers detected:", sum(df['Outlier'] == -1))
 
-# Calculating the percentage of outliers
-outlier_percentage = (sum(df['Outlier'] == -1) / len(df)) * 100
-print(f"Percentage of outliers in the dataset: {outlier_percentage:.2f}%")
+"""
+We don't have to detecte outliers in this dataset as it has been preprocessed using PCA technique.
+However, if needed, below is the code to detect and remove outliers using Isolation Forest.
+"""
+
+# # Outlier Detection using Isolation Forest
+# iso_forest = IsolationForest(n_estimators=150, contamination='auto', random_state=42)
+# outliers = iso_forest.fit_predict(df[continuous_cols])
+# df['Outlier'] = outliers
+# print("Number of outliers detected:", sum(df['Outlier'] == -1))
+
+# # Calculating the percentage of outliers
+# outlier_percentage = (sum(df['Outlier'] == -1) / len(df)) * 100
+# print(f"Percentage of outliers in the dataset: {outlier_percentage:.2f}%")
 
 # # Removing outliers
 # df_cleaned = df[df['Outlier'] == 1].drop(columns=['Outlier'])
