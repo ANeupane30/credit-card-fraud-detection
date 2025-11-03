@@ -1,5 +1,8 @@
 from sklearn.preprocessing import RobustScaler
 from load_data import df
+from imblearn.over_sampling import SMOTE
+
+
 """  
 Data Preprocessing
 
@@ -36,3 +39,14 @@ df['scaled_time'] = rs.fit_transform(df['Time'].values.reshape(-1,1))
 df.drop(['Time', 'Amount'], axis=1, inplace=True)
 print(df.head())
 # print(df)
+
+
+# Oversampling the minority class using SMOTE technique
+X = df.drop('Class', axis=1)
+y = df['Class']
+smote = SMOTE(random_state=42)
+X_resampled, y_resampled = smote.fit_resample(X, y)
+df_resampled = X_resampled.copy()
+df_resampled['Class'] = y_resampled
+print("Original dataset shape:", df['Class'].value_counts())
+print("Resampled dataset shape:", df_resampled['Class'].value_counts())
