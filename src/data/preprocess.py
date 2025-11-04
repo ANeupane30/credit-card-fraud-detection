@@ -50,3 +50,7 @@ df_resampled = X_resampled.copy()
 df_resampled['Class'] = y_resampled
 print("Original dataset shape:", df['Class'].value_counts())
 print("Resampled dataset shape:", df_resampled['Class'].value_counts())
+
+
+# saving the preprocessed data
+df_resampled.to_csv('../credit-card-fraud-detection/data/processed/preprocessed_data.csv', index=False)
